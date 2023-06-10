@@ -35,16 +35,16 @@ qa/
 # Примеры работы приложения
 
 Внешний вид главного окна
-![mainpage](http://url/to/img.png)
+![mainpage](https://github.com/internetProhozhij/django_qa/blob/master/qa/screenshots/main.png)
 
 Внешний вид окона регистрации 
-![regpage](http://url/to/img.png)
+![regpage](https://github.com/internetProhozhij/django_qa/blob/master/qa/screenshots/reg.png)
 
 Внешний вид окона авторизации
-![authpage](http://url/to/img.png)
+![authpage](https://github.com/internetProhozhij/django_qa/blob/master/qa/screenshots/auth.png)
 
 Внешний вид окна создания вопроса
-![questionpage](http://url/to/img.png)
+![questionpage](https://github.com/internetProhozhij/django_qa/blob/master/qa/screenshots/question.png)
 
 Внешний вид окна ответов
-![answerpage](http://url/to/img.png)
+![answerpage](https://github.com/internetProhozhij/django_qa/edit/master/qa/README.md)
