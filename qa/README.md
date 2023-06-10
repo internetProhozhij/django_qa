@@ -47,4 +47,4 @@ qa/
 ![questionpage](https://github.com/internetProhozhij/django_qa/blob/master/qa/screenshots/question.png)
 
 Внешний вид окна ответов
-![answerpage](https://github.com/internetProhozhij/django_qa/edit/master/qa/README.md)
+![answerpage](https://github.com/internetProhozhij/django_qa/blob/master/qa/screenshots/answer.png)
