@@ -1,0 +1,85 @@
+<!-- 
+Эта инструкция загружает обрабочик, который форматирует обычные текст в .md
+md_tag является самописным и располагается по пути <proj_root>/qa/templatetags
+-->
+{% load md_tag %}
+
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <title>Answer</title>
+    </head>
+
+
+    <body class="container-fluid h-100 overflow-hidden" style="position: absolute;">
+        <div class="row h-100">
+            <!-- Левая колонка, в которой находится кнопка возврата на главную страницу -->
+            <div class="col-2">
+                <a class="container-fluid mt-3 btn btn-outline-primary" href="{% url 'core:home' %}"><-----</a>
+            </div>
+
+            <!-- Центральная колонка, в которой располагается вопрос и список ответов -->
+            <div class="col-8 d-flex flex-column h-100 overflow-auto" style="scrollbar-width: thin;">
+                <div class="container-fluid px-0 mt-3">
+                    <h4 class="font-weight-bolder">{{ question.header }}</h4>                
+                </div> 
+                <div class="container-fluid d-flex border-bottom px-0">
+                    <div class="col-6 px-0">{{ question.uid }}</div>
+                    <div class="col-6 px-0 text-right">{{ question.date }}</div>
+                </div>
+                <div class="mt-3 border-bottom">
+                    {{ question.body|to_md|safe }}
+                    <p class="my-3"></p>
+                </div>
+
+                <!-- Отвечать на вопросы могут только авторизованные пользователи -->
+                {% if username %}
+                    {% if messages %}
+                        {% for msg in messages %}
+                            {{ msg }}
+                        {% endfor %}
+                    {% endif %}
+
+                    <form method="post" action="" class="d-flex flex-column w-100 mt-3 border-bottom">
+                        <p class="container-fluid px-0 text-center bg-dark text-white">
+                            Поле для ответа (поддерживает язык разметки Markdown)
+                        </p>
+                        {% csrf_token %}
+                        {% for field in aform %}
+                            {{ field }}
+                        {% endfor %}
+                        <button class="btn btn-outline-success my-3" type="submit">Опубликовать</button>
+                    </form>
+                {% endif %}
+
+                <div class="container-fluid border-bottom px-0 mt-3 bg-dark text-white text-center">
+                    <p class="text-weight-bold my-0">Количество ответов: {{ answers|length }}</p>
+                </div>
+                
+                <!-- Область с ответами на вопрос -->
+                <div class="d-flex flex-column w-100 mt-3 border-top">
+                    {% for obj in answers %}
+                        <div class="d-flex flex-column border-bottom mb-2">
+                            {{ obj.body|to_md|safe }}
+
+                            <div class="container-fluid d-flex px-0 my-2 bg-info">
+                                <div class="col-6 px-0">{{ obj.uid }}</div>
+                                <div class="col-6 px-0 text-right">{{ obj.date }}</div>
+                            </div>
+                            <!-- 
+                            За что, Django? Почему вместо obj.uid, ты используешь obj.uid_id??? 
+                            TODO Нжуно отредактировать базу данных
+                            -->
+                            {% if obj.uid_id == username %}
+                                <a class="btn btn-outline-success mb-2" href="{% url 'core:answer' obj.qid_id %}?answer={{ obj.aid }}">Редактировать</a>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-2">
+                <!-- <a class="container-fluid mt-3 btn btn-outline-primary" href="{% url 'core:question' %}">++</a> -->
+            </div>
+        </div>
+    </body>
+</html>

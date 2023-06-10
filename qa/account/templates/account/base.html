@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <title>Авторизация</title>
+    </head>
+
+
+    <body class="container-fluid h-100 overflow-hidden" style="position: absolute">
+        <div class="row h-100">
+            <!-- Левая колонка, в которой находится кнопка возврата на главную страницу -->
+            <div class="col-2">
+                <a class="container-fluid mt-3 btn btn-outline-primary" href="{% url 'core:home' %}"><-----</a>
+            </div>
+
+            <!-- Центральная колонка, в которой располагается вопрос и список ответов -->
+            <form method="POST" action="" class="col-8 d-flex flex-column mt-3 align-items-center border-left border-right">
+                {% block form %}
+                {% endblock form %}
+            </form>
+
+            <div class="col-2"></div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,15 @@
+{% extends 'account/base.html' %}
+
+{% block form %}
+    {% csrf_token %}
+    {% for field in form %}
+        {{ field }}
+    {% endfor %}
+    {% if signup_form.errors %}
+        {% for elmt in signup_form %}
+            <span class="container-fluid text-danger"> {{ elmt.errors }} </span> 
+        {% endfor %}
+    {% endif %}
+    <button class="btn btn-primary w-75 mb-3" type="submit">Войти</button>
+    <a href="{% url 'account:signup' %}" class="text-center">Зарегистрироваться</a>
+{% endblock form %}
