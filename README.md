@@ -98,17 +98,26 @@ qa/
 
 # Примеры работы приложения
 
-Внешний вид главного окна
+### Внешний вид главного окна
+
 ![mainpage](https://github.com/internetProhozhij/django_qa/blob/master/screenshots/main.png)
+<!---->
 
-Внешний вид окона регистрации 
+### Внешний вид окона регистрации 
+
 ![regpage](https://github.com/internetProhozhij/django_qa/blob/master/screenshots/reg.png)
+<!---->
 
-Внешний вид окона авторизации
+### Внешний вид окона авторизации
+
 ![authpage](https://github.com/internetProhozhij/django_qa/blob/master/screenshots/auth.png)
+<!---->
 
-Внешний вид окна создания вопроса
+### Внешний вид окна создания вопроса
+
 ![questionpage](https://github.com/internetProhozhij/django_qa/blob/master/screenshots/question.png)
+<!---->
 
-Внешний вид окна ответов
+### Внешний вид окна ответов
+
 ![answerpage](https://github.com/internetProhozhij/django_qa/blob/master/screenshots/answer.png)
