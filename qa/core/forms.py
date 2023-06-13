@@ -7,7 +7,7 @@ from .models import THEMES
 
 
 LOCAL_THEMES = deepcopy(THEMES)
-LOCAL_THEMES.append(("all", "Все"))
+LOCAL_THEMES.insert(0, ("all", "Все"))
 
 
 class QuestionForm(forms.ModelForm):

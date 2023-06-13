@@ -46,7 +46,7 @@
 
                 {% for obj in questions %}
                     <div class="d-flex flex-column border-bottom mb-1">
-                        <h4 class="fs-1 text-center font-weight-bolder text-uppercase">{{ obj.header }}</h4>
+                        <h4 class="text-center font-weight-bolder text-uppercase">{{ obj.header }}</h4>
                         <div class="container-fluid d-flex justify-content-center">
                             <a class="btn btn-link mb-1" href="{% url 'core:answer' obj.qid %}">Открыть</a>
                             {% if is_god %}

@@ -25,7 +25,8 @@ def signup(request: HttpRequest) -> HttpResponse:
             form.save()
             return redirect("account:signin")
 
-    context = {"form": form}
+    context = {"title": "Регистрация", 
+               "form": form}
     return render(request, SIGNUP_TEMPLATE, context)
 
 
@@ -42,7 +43,8 @@ def signin(request: HttpRequest) -> HttpResponse:
             login(request, user=user)
             return redirect('core:home')
 
-    context = {"form": form}
+    context = {"title": "Авторизация",
+               "form": form}
     return render(request, SIGNIN_TEMPLATE, context)
 
 
