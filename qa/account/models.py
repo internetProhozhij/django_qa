@@ -13,7 +13,7 @@ class AccountManager(BaseUserManager):
     Магическая штука, которая управляет созданием записей
     в таблице пользователей.
     """
-    user_in_migrations = True
+    use_in_migrations = True
 
     def create_user(self, username, password):
         user = self.model(username=username)
@@ -22,8 +22,7 @@ class AccountManager(BaseUserManager):
         return user
 
     def create_superuser(self, username, password, is_god=True):
-        user = self.model(username=username,
-                          is_god=is_god)
+        user = self.model(username=username, is_god=is_god)
         user.set_password(password)
         user.save()
         return user
