@@ -53,14 +53,17 @@ def build_context(request: HttpRequest, qid: str, aid: str=None) -> dict:
         # Пользователи могу редактировать собственные ответы. Когда пользователь
         # нажимает на кнопку "редактировать", то формируется url следующего вида:
         # domain/question/<quesiton_id>?answer=<answer_id>.
-        # Костыль ли это? Да. Костыль. Но другого я придумать не сумел.
+        # Наверно, это костыль. Но другого я придумать не сумел.
         # Так как для идентификации ответа используется хэш, то при редактировании
         # ответа старый удаляется, новый добавляется
         aform = AnswerForm(request.POST)
         if aform.is_valid():
             try:
                 create_record(request.POST, request.user, question_obj)
-                if aid and answer_obj:
+                # Проверка совпадения автора ответа и текущего пользователя нужна,
+                # чтобы предотвратить возможность изменения ответа других пользователей
+                # методом подбора хэшей. Как же это плохо
+                if aid and answer_obj and answer_obj.uid == request.user:
                     answer_obj.delete()
                 aform = AnswerForm()
                 answer_objs = list(AnswerModel.objects.filter(qid=qid))

@@ -8,5 +8,5 @@ from .views import answer
 app_name = "core"
 urlpatterns = [path("", home, name="home"),
                path("question/", question, name="question"), 
-               path("answer/<str:qid>", answer, name="answer")] 
+               path("<str:qid>/", answer, name="answer")] 
 
