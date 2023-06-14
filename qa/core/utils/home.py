@@ -5,6 +5,16 @@ from core.forms import SearchForm
 from account.models import AccountModel
 
 
+def is_god(user: AccountModel) -> bool:
+    """
+    Является ли опльзователь админом
+    """
+    try:
+        return user.is_god
+    except:
+        return False
+
+
 def get_username(request: HttpRequest) -> str:
     """
     Получение имени пользователя.

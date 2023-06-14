@@ -19,7 +19,9 @@ def home(request: HttpRequest) -> HttpResponse:
     # костыльно, но имеем то, что имеем.
     # При удалении вопроса в шаблоне HOME_TEMPLATE формируется url
     # следующего вида: domain/?del=<question_id>
-    if request.GET.get("del", None) is not None:
+    # Чтобы удалять вопросы мог только администратор, нужно проверять
+    # авторизован ли пользователь и есть ли у него поле .is_god
+    if request.GET.get("del", None) and utils.home.is_god(request.user):
         utils.home.delete_question(request.GET.get("del"))
 
     context = utils.home.build_context(request)
