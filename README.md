@@ -79,7 +79,7 @@ qa/
 - `is_god`: флаг администратора (`True`: админ, `False`: простой пользователь);
 - `last_login`: дата последней авторизации (Django сам его создал, без использования этого
     поля метод встроенной формы авторизации пользователя `.is_valid()` завершается фатальным
-    крахом. Я решил ничего не трогать, поэтому имеем что имеем).
+    крахом. Я решил ничего не трогать).
 <!---->
 
 ### Таблица `Вопрос`
@@ -117,12 +117,12 @@ qa/
 ![mainpage](https://github.com/internetProhozhij/django_qa/blob/master/screenshots/main.png)
 <!---->
 
-### Внешний вид окона регистрации 
+### Внешний вид окна регистрации 
 
 ![regpage](https://github.com/internetProhozhij/django_qa/blob/master/screenshots/reg.png)
 <!---->
 
-### Внешний вид окона авторизации
+### Внешний вид окна авторизации
 
 ![authpage](https://github.com/internetProhozhij/django_qa/blob/master/screenshots/auth.png)
 <!---->
