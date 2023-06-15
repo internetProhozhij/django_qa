@@ -6,15 +6,7 @@ from core.models import AnswerModel
 from core.models import QuestionModel
 from core.forms import AnswerForm
 from account.models import AccountModel
-
-
-def get_username(request: HttpRequest) -> str:
-    """
-    Получение имени пользователя.
-    """
-    if not request.user:
-        return ""
-    return request.user.username
+from .home import get_username
 
 
 def create_record(data: dict, 
@@ -23,10 +15,9 @@ def create_record(data: dict,
     """
     Создание записи ответа.
     """
-    aid = sha256(f"{data['body']}".encode("utf-8")).hexdigest()
-    body = data["body"]
-    obj = AnswerModel.objects.create(aid=aid,
-                                     body=body,
+    aid = sha256(f"{data['body']}".encode("utf-8"))
+    obj = AnswerModel.objects.create(aid=aid.hexdigest(),
+                                     body=data["body"],
                                      uid=user_obj,
                                      qid=question_obj)
     obj.save()
@@ -50,10 +41,9 @@ def build_context(request: HttpRequest, qid: str, aid: str=None) -> dict:
     aform = AnswerForm(data=answer_obj.__dict__) if answer_obj else AnswerForm()
 
     if request.method == "POST":
-        # Пользователи могу редактировать собственные ответы. Когда пользователь
-        # нажимает на кнопку "редактировать", то формируется url следующего вида:
-        # domain/question/<quesiton_id>?answer=<answer_id>.
-        # Наверно, это костыль. Но другого я придумать не сумел.
+        # Пользователи могу редактировать собственные ответы. 
+        # Когда пользователь нажимает на кнопку "редактировать", то формируется 
+        # url вида: domain/<quesiton_id>?answer=<answer_id>. 
         # Так как для идентификации ответа используется хэш, то при редактировании
         # ответа старый удаляется, новый добавляется
         aform = AnswerForm(request.POST)
@@ -61,7 +51,7 @@ def build_context(request: HttpRequest, qid: str, aid: str=None) -> dict:
             try:
                 create_record(request.POST, request.user, question_obj)
                 # Проверка совпадения автора ответа и текущего пользователя нужна,
-                # чтобы предотвратить возможность изменения ответа других пользователей
+                # чтобы предотвратить возможность изменять ответы других пользователей
                 # методом подбора хэшей. Как же это плохо
                 if aid and answer_obj and answer_obj.uid == request.user:
                     answer_obj.delete()

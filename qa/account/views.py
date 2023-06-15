@@ -18,7 +18,6 @@ def signup(request: HttpRequest) -> HttpResponse:
     Представление страницы регистрации.
     """
     form = AccountCreationForm()
-
     if request.method == "POST":
         form = AccountCreationForm(request.POST)
         if form.is_valid():
@@ -35,7 +34,6 @@ def signin(request: HttpRequest) -> HttpResponse:
     Представление страницы авторизации.
     """
     form = AccountAuthForm()
-
     if request.method == "POST":
         form = AccountAuthForm(request, data=request.POST)
         if form.is_valid():

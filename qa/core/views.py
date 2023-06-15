@@ -15,12 +15,11 @@ def home(request: HttpRequest) -> HttpResponse:
     """
     Представление домашней страницы.
     """
-    # Кажется, что реализация удаления вопроса выполнена максимально
-    # костыльно, но имеем то, что имеем.
-    # При удалении вопроса в шаблоне HOME_TEMPLATE формируется url
-    # следующего вида: domain/?del=<question_id>
+    # Кажется, что реализация удаления вопроса выполнена максимально костыльно.
+    # При удалении вопроса в шаблоне HOME_TEMPLATE формируется url вида:
+    #                   domain/?del=<question_id>
     # Чтобы удалять вопросы мог только администратор, нужно проверять
-    # авторизован ли пользователь и есть ли у него поле .is_god
+    # авторизован ли пользователь и активно ли у него поле .is_god
     if request.GET.get("del", None) and utils.home.is_god(request.user):
         utils.home.delete_question(request.GET.get("del"))
 
@@ -44,6 +43,7 @@ def answer(request: HttpRequest, qid: str=None) -> HttpResponse:
     """
     Представление страницы ответов.
     """
-    context = utils.answer.build_context(request, qid, request.GET.get("answer", None))
+    context = utils.answer.build_context(request, qid, 
+                                         request.GET.get("answer", None))
     return render(request, ANSWER_TEMPLATE, context)
 

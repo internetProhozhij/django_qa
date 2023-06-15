@@ -24,17 +24,6 @@ def get_username(request: HttpRequest) -> str:
     return request.user.username
 
 
-def is_god(username: str) -> bool:
-    """
-    Получение метки пользователя.
-    """
-    try:
-        user_obj = AccountModel.objects.get(username=username)
-        return user_obj.is_god
-    except:
-        return False
-
-
 def get_questions(theme: str="all", header: str="") -> list:
     """
     Получение вопрсов по заданной теме и заголовку.

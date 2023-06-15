@@ -11,14 +11,11 @@ def create_record(data: dict, user_obj: AccountModel) -> int:
     """
     Создание записи вопроса.
     """
-    theme = data["theme"]
-    header = data["header"]
-    body = data["body"]
-    qid = sha256(f"{header}-{body}".encode("utf-8")).hexdigest()
-    question = QuestionModel.objects.create(qid=qid, 
-                                            theme=theme, 
-                                            header=header, 
-                                            body=body, 
+    qid = sha256(f"{data['header']}-{data['body']}".encode("utf-8"))
+    question = QuestionModel.objects.create(qid=qid.hexdigest(), 
+                                            theme=data["theme"], 
+                                            header=data["header"], 
+                                            body=data["body"], 
                                             uid=user_obj)
     question.save()
     return 0

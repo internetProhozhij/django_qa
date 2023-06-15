@@ -12,7 +12,7 @@ class AccountCreationForm(UserCreationForm):
     username = forms.CharField(required=True,
                                label="",
                                widget=forms.TextInput(attrs={"class": "d-flex w-75 text-center mb-3",
-                                                             "placeholder": "лоин"}))
+                                                             "placeholder": "логин"}))
     password1 = forms.CharField(required=True, 
                                label="",
                                widget=forms.PasswordInput(attrs={"class": "d-felx w-75 text-center mb-3",
@@ -35,7 +35,7 @@ class AccountAuthForm(AuthenticationForm):
     username = forms.CharField(required=True,
                                label="",
                                widget=forms.TextInput(attrs={"class": "d-flex w-75 text-center mb-3",
-                                                             "placeholder": "лоин"}))
+                                                             "placeholder": "логин"}))
     password = forms.CharField(required=True, 
                                label="",
                                widget=forms.PasswordInput(attrs={"class": "d-felx w-75 text-center mb-3",
